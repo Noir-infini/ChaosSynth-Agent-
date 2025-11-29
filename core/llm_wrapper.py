@@ -41,8 +41,13 @@ class GeminiWrapper:
         # Configure the Gemini API
         genai.configure(api_key=self.api_key)
         
-        # Get model name from environment variable or use default
-        model_name = os.getenv('GEMINI_MODEL', 'gemini-2.0-flash-lite-preview-02-05')
+        # Get model name from environment variable
+        model_name = os.getenv('GEMINI_MODEL')
+        
+        if not model_name:
+            raise ValueError(
+                "No model name provided. Please set the GEMINI_MODEL environment variable."
+            )
         
         # Initialize the model
         self.model = genai.GenerativeModel(model_name)
