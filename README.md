@@ -111,7 +111,7 @@ python app/terminal_test.py
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## 📄 License
 
@@ -124,9 +124,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ⚡ Support
 
-If you encounter any issues or have questions:
-- Open an [issue](https://github.com/Noir-infini/ChaosSynth-Agent-/issues)
-- Check the [documentation](docs/)
+If you encounter any issues or have questions, open an [issue](https://github.com/Noir-infini/ChaosSynth-Agent-/issues).
 
 ---
 
