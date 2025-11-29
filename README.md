@@ -1,4 +1,4 @@
-# ChaosSynth 2.0
+# ChaosSynth Agent
 
 **AI-powered mental health companion with chaos prediction and emotional analysis.**
 
