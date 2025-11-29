@@ -25,8 +25,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ChaosSynth-2.0.git
-   cd ChaosSynth-2.0
+   git clone https://github.com/Noir-infini/ChaosSynth-Agent-.git
+   cd "ChaosSynth Agent"
    ```
 
 2. **Create a virtual environment**
@@ -125,7 +125,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## ⚡ Support
 
 If you encounter any issues or have questions:
-- Open an [issue](https://github.com/yourusername/ChaosSynth-2.0/issues)
+- Open an [issue](https://github.com/Noir-infini/ChaosSynth-Agent-/issues)
 - Check the [documentation](docs/)
 
 ---
