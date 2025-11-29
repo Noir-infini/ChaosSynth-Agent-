@@ -36,7 +36,21 @@
    ```
 
 3. **Install dependencies**
+
+   **For all platforms:**
    ```bash
+   pip install -r requirements.txt
+   ```
+
+   **Windows-specific (if pyarrow build fails):**
+   ```bash
+   # Option 1: Upgrade pip and install pyarrow separately (recommended)
+   python -m pip install --upgrade pip setuptools wheel
+   pip install pyarrow
+   pip install -r requirements.txt
+   
+   # Option 2: Use conda if you have Anaconda/Miniconda
+   conda install -c conda-forge pyarrow
    pip install -r requirements.txt
    ```
 
@@ -102,6 +116,32 @@ For testing without the UI:
 ```bash
 python app/terminal_test.py
 ```
+
+## 🔧 Troubleshooting
+
+### Windows: `Failed building wheel for pyarrow`
+
+**Problem:** Streamlit depends on `pyarrow`, which requires C++ compilation on Windows if a pre-built wheel isn't available.
+
+**Solutions (try in order):**
+
+1. **Use pre-built wheels (easiest):**
+   ```bash
+   python -m pip install --upgrade pip setuptools wheel
+   pip install pyarrow
+   pip install -r requirements.txt
+   ```
+
+2. **Use Conda (if you have Anaconda/Miniconda):**
+   ```bash
+   conda install -c conda-forge pyarrow streamlit
+   pip install google-generativeai python-dotenv
+   ```
+
+3. **Install Visual C++ Build Tools (last resort):**
+   - Download [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+   - Install "Desktop development with C++" workload
+   - Restart terminal and retry `pip install -r requirements.txt`
 
 ## ⚠️ Important Notes
 
