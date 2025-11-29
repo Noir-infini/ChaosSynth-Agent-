@@ -2,7 +2,7 @@
 
 **AI-powered mental health companion with chaos prediction and emotional analysis.**
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.28+-red.svg)](https://streamlit.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -18,7 +18,7 @@
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.11 or higher
 - Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
 
 ### Installation
@@ -84,7 +84,7 @@ ChaosSynth-2.0/
 - **Frontend**: Streamlit
 - **AI**: Google Gemini API
 - **Storage**: JSON-based local storage
-- **Language**: Python 3.8+
+- **Language**: Python 3.11+
 
 ## 📖 Usage
 
@@ -109,9 +109,6 @@ python app/terminal_test.py
 - **API Usage**: This app uses the Google Gemini API (free tier available)
 - **Not a Replacement**: This is NOT a replacement for professional mental health care
 
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## 📄 License
 
@@ -120,11 +117,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Built with [Streamlit](https://streamlit.io)
-- Powered by [Google Gemini](https://deepmind.google/technologies/gemini/)
-
-## ⚡ Support
-
-If you encounter any issues or have questions, open an [issue](https://github.com/Noir-infini/ChaosSynth-Agent-/issues).
+- Powered by [Google Gemini](https://deepmind.google/technologies/gemini/).
 
 ---
 
