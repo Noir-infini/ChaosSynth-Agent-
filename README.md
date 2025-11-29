@@ -56,7 +56,7 @@ The app will open in your browser at `http://localhost:8501`
 ## 📁 Project Structure
 
 ```
-ChaosSynth-2.0/
+ChaosSynth-Agent/
 ├── app/                    # Application entry points
 │   ├── streamlit_app.py    # Main Streamlit UI
 │   ├── main.py             # Backend server
