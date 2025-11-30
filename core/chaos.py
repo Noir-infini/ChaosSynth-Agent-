@@ -308,23 +308,40 @@ if __name__ == "__main__":
         
     predictor = ChaosPredictor(llm=llm_instance)
     
-    # Sample data
-    sample_chat_history = [
-        {"role": "user", "content": "I love this!"},
-        {"role": "assistant", "content": "That's great."},
-        {"role": "user", "content": "Actually I hate it now."},
-        {"role": "assistant", "content": "Oh, why?"},
-        {"role": "user", "content": "It's amazing again!"},
-        {"role": "assistant", "content": "You seem conflicted."},
-        {"role": "user", "content": "No I'm sad."},
-    ]
+    # Load real data if available
+    from memory.chat_memory import ChatMemory
+    from memory.emotion_log import EmotionLog
     
-    sample_logs = [
-        {"raw_text": "I love this!", "emotion_tags": ["joy"]},
-        {"raw_text": "Actually I hate it now.", "emotion_tags": ["anger"]},
-        {"raw_text": "It's amazing again!", "emotion_tags": ["excitement"]},
-        {"raw_text": "No I'm sad.", "emotion_tags": ["sadness"]},
-    ]
+    chat_memory = ChatMemory()
+    emotion_log = EmotionLog()
+    user_id = "test_user"
+    
+    real_chat_history = chat_memory.get_recent_context(user_id, limit=20)
+    real_logs = emotion_log.get_recent_logs(user_id, days=7)
+    
+    if real_chat_history:
+        print(f"Using REAL chat history ({len(real_chat_history)} messages)...")
+        sample_chat_history = real_chat_history
+        sample_logs = real_logs
+    else:
+        print("No real data found. Using HARDCODED sample data...")
+        # Sample data
+        sample_chat_history = [
+            {"role": "user", "content": "I love this!"},
+            {"role": "assistant", "content": "That's great."},
+            {"role": "user", "content": "Actually I hate it now."},
+            {"role": "assistant", "content": "Oh, why?"},
+            {"role": "user", "content": "It's amazing again!"},
+            {"role": "assistant", "content": "You seem conflicted."},
+            {"role": "user", "content": "No I'm sad."},
+        ]
+        
+        sample_logs = [
+            {"raw_text": "I love this!", "emotion_tags": ["joy"]},
+            {"raw_text": "Actually I hate it now.", "emotion_tags": ["anger"]},
+            {"raw_text": "It's amazing again!", "emotion_tags": ["excitement"]},
+            {"raw_text": "No I'm sad.", "emotion_tags": ["sadness"]},
+        ]
     
     score, reason = predictor.compute_chaos(sample_chat_history, sample_logs)
     print(f"Chaos Score: {score}")
