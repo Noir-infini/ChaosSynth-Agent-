@@ -339,38 +339,36 @@ if __name__ == "__main__":
     predictor = Predictor(profile_mem, emotion_log, llm_instance)
     feedback_loop = FeedbackLoop()
     
-    # Create a test user profile
+    # Use existing profile or create if doesn't exist
     test_user_id = "test_user"
-    profile_mem.create_profile(
-        user_id=test_user_id,
-        profile_data={
-            "name": "Test User",
-            "hobbies": ["coding", "reading", "music"],
-            "goals": ["reduce stress", "improve focus"],
-            "fears": ["deadlines", "social pressure"]
-        }
-    )
+    if not profile_mem.profile_exists(test_user_id):
+        print("Creating new test profile...")
+        profile_mem.create_profile(
+            user_id=test_user_id,
+            profile_data={
+                "name": "Test User",
+                "hobbies": ["coding", "reading", "music"],
+                "goals": ["reduce stress", "improve focus"],
+                "fears": ["deadlines", "social pressure"]
+            }
+        )
+    else:
+        print("Using existing test_user profile...")
     
-    # Create realistic chat history (simulating a user in distress)
-    print("Creating test chat history...")
-    test_conversations = [
-        ("user", "i am getting bullied in school"),
-        ("assistant", "I'm truly sorry to hear that you're experiencing bullying at school. That's a really difficult situation."),
-        ("user", "teachers are bullying me"),
-        ("assistant", "I am so sorry to hear that the teachers are bullying you. That is absolutely not okay."),
-        ("user", "what should i do even my parents are not listening"),
-        ("assistant", "I'm so sorry that you're feeling unheard, especially by the people you should be able to rely on most."),
-        ("user", "i want to stop going to school"),
-        ("assistant", "I hear you. It makes perfect sense that you'd want to avoid school when you're going through something so difficult.")
-    ]
+    # Use existing chat history from data files if available
+    print("Loading existing chat history from data files...")
+    existing_chat = chat_memory.get_recent_context(test_user_id, limit=50)
+    existing_logs = emotion_log.get_recent_logs(test_user_id, days=30)
     
-    # Add chat history and analyze emotions
-    print("Analyzing emotions from chat history...")
-    for role, content in test_conversations:
-        chat_memory.add_turn(test_user_id, role, content)
-        # Analyze user messages for emotions
-        if role == "user":
-            emotion_log.add_log(test_user_id, content)
+    if existing_chat:
+        print(f"Found {len(existing_chat)} existing chat messages")
+    else:
+        print("No existing chat history found - will use clean profile only")
+    
+    if existing_logs:
+        print(f"Found {len(existing_logs)} existing emotion logs")
+    else:
+        print("No existing emotion logs found")
 
     
     # Initialize SuggestionEngine
