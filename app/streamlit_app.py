@@ -305,7 +305,7 @@ def init_components():
         
         predictor = Predictor(profile_mem, emotion_log, llm)
         feedback_loop = FeedbackLoop()
-        suggestion_engine = SuggestionEngine(profile_mem, emotion_log, predictor, llm, feedback_loop)
+        suggestion_engine = SuggestionEngine(profile_mem, emotion_log, predictor, llm, feedback_loop, chat_memory)
         chaos_predictor = ChaosPredictor(llm)
         
         return {

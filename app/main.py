@@ -75,7 +75,7 @@ try:
     
     if profile_memory and emotion_log and llm_wrapper:
         predictor = Predictor(profile_memory, emotion_log, llm_wrapper)
-        suggestion_engine = SuggestionEngine(profile_memory, emotion_log, predictor, llm_wrapper, feedback_loop)
+        suggestion_engine = SuggestionEngine(profile_memory, emotion_log, predictor, llm_wrapper, feedback_loop, chat_memory)
         
         chat_engine = ChatEngine(
             profile_memory, 

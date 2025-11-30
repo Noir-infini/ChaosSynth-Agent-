@@ -17,13 +17,16 @@ from core.llm_wrapper import GeminiWrapper
 from services.fallback_library import get_fallback_suggestions
 from services.feedback_loop import FeedbackLoop
 
+from memory.chat_memory import ChatMemory
+
 class SuggestionEngine:
     """
     Generates supportive suggestions based on user data and predictions.
     """
 
     def __init__(self, profile_memory: ProfileMemory, emotion_log: EmotionLog,
-                 predictor: Predictor, llm: GeminiWrapper, feedback_loop: FeedbackLoop, config: dict = None):
+                 predictor: Predictor, llm: GeminiWrapper, feedback_loop: FeedbackLoop, 
+                 chat_memory: Optional[ChatMemory] = None, config: dict = None):
         """
         Initialize the SuggestionEngine.
 
@@ -33,6 +36,7 @@ class SuggestionEngine:
             predictor: Instance of Predictor.
             llm: Instance of GeminiWrapper.
             feedback_loop: Instance of FeedbackLoop.
+            chat_memory: Optional Instance of ChatMemory (for chaos prediction).
             config: Optional configuration dictionary.
         """
         self.profile_memory = profile_memory
@@ -40,6 +44,7 @@ class SuggestionEngine:
         self.predictor = predictor
         self.llm = llm
         self.feedback_loop = feedback_loop
+        self.chat_memory = chat_memory
         self.config = config or {}
         self.mascot_asset = "/mnt/data/a9fa5d35-d685-49d5-9e50-ed648825b2c2.png"
 
@@ -59,11 +64,16 @@ class SuggestionEngine:
         recent_logs_7 = self.emotion_log.get_recent_logs(user_id, days=7)
         recent_logs_30 = self.emotion_log.get_recent_logs(user_id, days=30)
         
+        # Get Chat History if available (for Chaos Prediction)
+        chat_history = None
+        if self.chat_memory:
+            chat_history = self.chat_memory.get_recent_context(user_id, limit=20)
+        
         # Get User Preferences from Feedback Loop
         preferences = self.feedback_loop.get_user_preferences(user_id)
         
         # 2. Get Predictions
-        predictions = self.predictor.predict_all(user_id)
+        predictions = self.predictor.predict_all(user_id, session_report, chat_history)
         
         stress = predictions.get("stress_prediction", 0)
         burnout = predictions.get("burnout_prediction", 0)
@@ -377,7 +387,8 @@ if __name__ == "__main__":
         emotion_log=emotion_log,
         predictor=predictor,
         llm=llm_instance,
-        feedback_loop=feedback_loop
+        feedback_loop=feedback_loop,
+        chat_memory=chat_memory
     )
     
     # Generate suggestions

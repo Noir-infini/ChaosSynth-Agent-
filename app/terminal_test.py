@@ -53,7 +53,7 @@ def init_components(api_key: Optional[str] = None):
     try:
         emotion_log = EmotionLog()
         predictor = Predictor(profile_memory, emotion_log, llm_wrapper)
-        suggestion_engine = SuggestionEngine(profile_memory, emotion_log, predictor, llm_wrapper, feedback_loop)
+        suggestion_engine = SuggestionEngine(profile_memory, emotion_log, predictor, llm_wrapper, feedback_loop, chat_memory)
         
         chat_engine = ChatEngine(
             profile_memory, 
