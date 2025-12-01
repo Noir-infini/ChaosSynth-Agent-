@@ -26,7 +26,7 @@
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Noir-infini/ChaosSynth-Agent-.git
-   cd "ChaosSynth Agent"
+   cd "ChaosSynth-Agent-"
    ```
 
 2. **Create a virtual environment**
